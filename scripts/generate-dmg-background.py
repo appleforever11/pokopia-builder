@@ -81,14 +81,14 @@ def draw_install_cue(draw):
     cue_font = font(FONT_ROUNDED, 23)
     small_font = font(FONT_ROUNDED, 15)
 
-    panel = (198, 358, 522, 410)
+    panel = (178, 358, 542, 410)
     draw.rounded_rectangle((panel[0] + 3, panel[1] + 4, panel[2] + 3, panel[3] + 4), radius=17, fill=(44, 82, 88, 72))
     draw.rounded_rectangle(panel, radius=17, fill=(255, 255, 255, 182), outline=(255, 255, 255, 235), width=2)
     centered_text(draw, "Drag app to Applications", 366, cue_font, (30, 74, 88, 255))
     centered_text(draw, "Drop the icon on the blue folder", 392, small_font, (58, 97, 106, 245))
 
-    start = (318, 309)
-    end = (410, 309)
+    start = (306, 309)
+    end = (404, 309)
     draw.line((start[0] + 3, start[1] + 4, end[0] + 3, end[1] + 4), fill=(40, 95, 115, 95), width=13)
     draw.line((start[0], start[1], end[0], end[1]), fill=(255, 255, 255, 238), width=9)
     draw.line((start[0], start[1], end[0], end[1]), fill=(61, 183, 215, 255), width=5)
