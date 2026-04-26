@@ -66,7 +66,7 @@ Rendering priority:
 Real model search path:
 
 ```text
-~/Documents/Pokopia Models
+User-selected model folder from the Choose Model Folder button
 ```
 
 Bundled model search path:

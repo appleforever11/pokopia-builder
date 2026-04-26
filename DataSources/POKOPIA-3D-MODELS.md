@@ -4,9 +4,7 @@ Pokopia Builder now looks for real model files before using procedural fallbacks
 
 ## Where To Put Models
 
-Drop item models into:
-
-`~/Documents/Pokopia Models`
+Use **Choose Model Folder** in the app and select the folder that contains your item models. This keeps local model loading compatible with the macOS App Sandbox.
 
 Supported extensions:
 

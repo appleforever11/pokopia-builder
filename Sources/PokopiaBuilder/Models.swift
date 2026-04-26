@@ -1,4 +1,5 @@
 import Foundation
+import AppKit
 import SwiftUI
 
 enum BlockKind: String, CaseIterable, Identifiable {
@@ -101,10 +102,12 @@ final class PlannerStore: ObservableObject {
     @Published var generatorProvider: BuildGeneratorProvider = .local
     @Published var isGeneratingAI = false
     @Published var statusMessage: String?
+    @Published var modelFolderName: String = "No model folder selected"
 
     init() {
         blocks = PokopiaData.loadCatalog()
         openAIAPIKey = UserDefaults.standard.string(forKey: "OpenAIAPIKey") ?? ""
+        modelFolderName = ModelFolderAccess.selectedFolderDisplayName
     }
 
     var filteredBlocks: [PokopiaBlock] {
@@ -209,6 +212,25 @@ final class PlannerStore: ObservableObject {
 
     func saveAPIKey() {
         UserDefaults.standard.set(openAIAPIKey, forKey: "OpenAIAPIKey")
+    }
+
+    func chooseModelFolder() {
+        let panel = NSOpenPanel()
+        panel.title = "Choose Pokopia Model Folder"
+        panel.prompt = "Choose"
+        panel.canChooseFiles = false
+        panel.canChooseDirectories = true
+        panel.allowsMultipleSelection = false
+
+        guard panel.runModal() == .OK, let url = panel.url else { return }
+
+        do {
+            try ModelFolderAccess.saveSelectedFolder(url)
+            modelFolderName = ModelFolderAccess.selectedFolderDisplayName
+            statusMessage = "Using model folder: \(url.lastPathComponent)"
+        } catch {
+            statusMessage = "Could not save model folder access: \(error.localizedDescription)"
+        }
     }
 
     func generateFromPrompt() async {

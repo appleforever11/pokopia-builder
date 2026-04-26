@@ -43,7 +43,7 @@ enum PokopiaData {
     }
 
     private static func loadGeneratedCatalog() -> [PokopiaBlock]? {
-        guard let url = Bundle.module.url(forResource: "pokopia-catalog", withExtension: "json") else {
+        guard let url = AppResources.bundle.url(forResource: "pokopia-catalog", withExtension: "json") else {
             return nil
         }
 

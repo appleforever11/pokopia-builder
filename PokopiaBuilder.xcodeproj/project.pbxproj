@@ -1,0 +1,362 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0CF0470C5927D0DB3A8EC9F5 /* PokopiaData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC46B2BFC3541B026FD766A /* PokopiaData.swift */; };
+		3D080D76B6ABEA8D1DA199F1 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 4CCD62B98BF8E3D990C06313 /* PrivacyInfo.xcprivacy */; };
+		6C89E91E1C85044FB9683BD9 /* ModelFolderAccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5CAFAC484AAE981A365EE52 /* ModelFolderAccess.swift */; };
+		73509F8E4E9C3DCE0ED8874B /* PokopiaBuilderApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27B2983719F1D5B93E7E616F /* PokopiaBuilderApp.swift */; };
+		94D872539D0F9198B1BC0CB5 /* AppResources.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1987B44CFD4491F9F4FF639B /* AppResources.swift */; };
+		9857D281E5E232217918C596 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115417A73C60F94FE16CF675 /* ContentView.swift */; };
+		9BA9B16C8FE428452DFC0419 /* OpenAIBuildIdeaClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F16611B80B7B40DB650B1B /* OpenAIBuildIdeaClient.swift */; };
+		C351F466FE5C1B168C934A0F /* PokopiaBuilder.icns in Resources */ = {isa = PBXBuildFile; fileRef = 10CA98FE43F00746BD41E9E2 /* PokopiaBuilder.icns */; };
+		C69C80A876BA4FAFFA0E4044 /* LocalBuildIdeaClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BABDE9C2D3E590A29C8B561 /* LocalBuildIdeaClient.swift */; };
+		C72BC723D1A7943118773D13 /* pokopia-catalog.json in Resources */ = {isa = PBXBuildFile; fileRef = 616DFC0D7E72168BB49DE917 /* pokopia-catalog.json */; };
+		DA68C43D652B290DA82121D3 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = C38F76D2EA8C3282EBF44D86 /* Models.swift */; };
+		E570E0AAB3D9A6EC8F55903C /* BuildSceneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7D3A8EF1FC2F8EE5E114CC8 /* BuildSceneView.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		10CA98FE43F00746BD41E9E2 /* PokopiaBuilder.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = PokopiaBuilder.icns; sourceTree = "<group>"; };
+		115417A73C60F94FE16CF675 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		1987B44CFD4491F9F4FF639B /* AppResources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppResources.swift; sourceTree = "<group>"; };
+		27B2983719F1D5B93E7E616F /* PokopiaBuilderApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokopiaBuilderApp.swift; sourceTree = "<group>"; };
+		29F16611B80B7B40DB650B1B /* OpenAIBuildIdeaClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenAIBuildIdeaClient.swift; sourceTree = "<group>"; };
+		4CCD62B98BF8E3D990C06313 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		5BABDE9C2D3E590A29C8B561 /* LocalBuildIdeaClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalBuildIdeaClient.swift; sourceTree = "<group>"; };
+		616DFC0D7E72168BB49DE917 /* pokopia-catalog.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "pokopia-catalog.json"; sourceTree = "<group>"; };
+		8BC46B2BFC3541B026FD766A /* PokopiaData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokopiaData.swift; sourceTree = "<group>"; };
+		A7D3A8EF1FC2F8EE5E114CC8 /* BuildSceneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildSceneView.swift; sourceTree = "<group>"; };
+		B5CAFAC484AAE981A365EE52 /* ModelFolderAccess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelFolderAccess.swift; sourceTree = "<group>"; };
+		C38F76D2EA8C3282EBF44D86 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
+		D1F21C108F5EA4F61C146582 /* PokopiaBuilder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PokopiaBuilder.app; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		18B50FA7EB2D3F33C58993E7 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				616DFC0D7E72168BB49DE917 /* pokopia-catalog.json */,
+				10CA98FE43F00746BD41E9E2 /* PokopiaBuilder.icns */,
+				4CCD62B98BF8E3D990C06313 /* PrivacyInfo.xcprivacy */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		1E6EE2983564D5C9771AC046 = {
+			isa = PBXGroup;
+			children = (
+				F90DF75248A51536320A9021 /* PokopiaBuilder */,
+				D0852356DB2DBE5369C8D0C6 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		D0852356DB2DBE5369C8D0C6 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D1F21C108F5EA4F61C146582 /* PokopiaBuilder.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F90DF75248A51536320A9021 /* PokopiaBuilder */ = {
+			isa = PBXGroup;
+			children = (
+				1987B44CFD4491F9F4FF639B /* AppResources.swift */,
+				A7D3A8EF1FC2F8EE5E114CC8 /* BuildSceneView.swift */,
+				115417A73C60F94FE16CF675 /* ContentView.swift */,
+				5BABDE9C2D3E590A29C8B561 /* LocalBuildIdeaClient.swift */,
+				B5CAFAC484AAE981A365EE52 /* ModelFolderAccess.swift */,
+				C38F76D2EA8C3282EBF44D86 /* Models.swift */,
+				29F16611B80B7B40DB650B1B /* OpenAIBuildIdeaClient.swift */,
+				27B2983719F1D5B93E7E616F /* PokopiaBuilderApp.swift */,
+				8BC46B2BFC3541B026FD766A /* PokopiaData.swift */,
+				18B50FA7EB2D3F33C58993E7 /* Resources */,
+			);
+			name = PokopiaBuilder;
+			path = Sources/PokopiaBuilder;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		690841BBEDC85690409CF4A3 /* PokopiaBuilder */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8EEE23C5A866445E3BF60FA9 /* Build configuration list for PBXNativeTarget "PokopiaBuilder" */;
+			buildPhases = (
+				5DD089D6AD630A64979C6DAD /* Sources */,
+				BCDF117B27CBC4989B23AAC1 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = PokopiaBuilder;
+			packageProductDependencies = (
+			);
+			productName = PokopiaBuilder;
+			productReference = D1F21C108F5EA4F61C146582 /* PokopiaBuilder.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		F0BCC211A5171CBFB9E6AAA8 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					690841BBEDC85690409CF4A3 = {
+						DevelopmentTeam = "";
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 2D70B9632623666D1864F137 /* Build configuration list for PBXProject "PokopiaBuilder" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = 1E6EE2983564D5C9771AC046;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = D0852356DB2DBE5369C8D0C6 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				690841BBEDC85690409CF4A3 /* PokopiaBuilder */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		BCDF117B27CBC4989B23AAC1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C351F466FE5C1B168C934A0F /* PokopiaBuilder.icns in Resources */,
+				3D080D76B6ABEA8D1DA199F1 /* PrivacyInfo.xcprivacy in Resources */,
+				C72BC723D1A7943118773D13 /* pokopia-catalog.json in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		5DD089D6AD630A64979C6DAD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				94D872539D0F9198B1BC0CB5 /* AppResources.swift in Sources */,
+				E570E0AAB3D9A6EC8F55903C /* BuildSceneView.swift in Sources */,
+				9857D281E5E232217918C596 /* ContentView.swift in Sources */,
+				C69C80A876BA4FAFFA0E4044 /* LocalBuildIdeaClient.swift in Sources */,
+				6C89E91E1C85044FB9683BD9 /* ModelFolderAccess.swift in Sources */,
+				DA68C43D652B290DA82121D3 /* Models.swift in Sources */,
+				9BA9B16C8FE428452DFC0419 /* OpenAIBuildIdeaClient.swift in Sources */,
+				73509F8E4E9C3DCE0ED8874B /* PokopiaBuilderApp.swift in Sources */,
+				0CF0470C5927D0DB3A8EC9F5 /* PokopiaData.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		5ECB6C1C63ACADFFA58D39B6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 6.0;
+			};
+			name = Debug;
+		};
+		603D33063D78DB421F18D3CC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = "";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 6.0;
+			};
+			name = Release;
+		};
+		C9286E331DFEF0C3E221D22B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = arm64;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = NO;
+				CODE_SIGN_ENTITLEMENTS = "config/PokopiaBuilder-AppStore.entitlements";
+				COMBINE_HIDPI_IMAGES = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				INFOPLIST_FILE = Sources/PokopiaBuilder/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = dev.pokopia.builder;
+				PRODUCT_NAME = PokopiaBuilder;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		E3C011A619F3367957873BF7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = arm64;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = NO;
+				CODE_SIGN_ENTITLEMENTS = "config/PokopiaBuilder-AppStore.entitlements";
+				COMBINE_HIDPI_IMAGES = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				INFOPLIST_FILE = Sources/PokopiaBuilder/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = dev.pokopia.builder;
+				PRODUCT_NAME = PokopiaBuilder;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		2D70B9632623666D1864F137 /* Build configuration list for PBXProject "PokopiaBuilder" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5ECB6C1C63ACADFFA58D39B6 /* Debug */,
+				603D33063D78DB421F18D3CC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		8EEE23C5A866445E3BF60FA9 /* Build configuration list for PBXNativeTarget "PokopiaBuilder" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C9286E331DFEF0C3E221D22B /* Debug */,
+				E3C011A619F3367957873BF7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = F0BCC211A5171CBFB9E6AAA8 /* Project object */;
+}

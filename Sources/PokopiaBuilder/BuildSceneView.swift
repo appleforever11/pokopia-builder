@@ -739,12 +739,21 @@ private extension PokopiaBlock {
     var modelURL: URL? {
         let names = modelLookupNames
         let extensions = ["usdz", "scn", "dae", "obj"]
-        let searchRoots = [
-            FileManager.default.homeDirectoryForCurrentUser
-                .appendingPathComponent("Documents")
-                .appendingPathComponent("Pokopia Models", isDirectory: true),
-            Bundle.module.resourceURL?.appendingPathComponent("Models", isDirectory: true)
-        ].compactMap { $0 }
+        var searchRoots: [URL] = []
+        var scopedAccessURL: URL?
+
+        if let selectedFolder = ModelFolderAccess.selectedFolderURL() {
+            scopedAccessURL = selectedFolder.startAccessingSecurityScopedResource() ? selectedFolder : nil
+            searchRoots.append(selectedFolder)
+        }
+
+        if let bundledModels = AppResources.bundle.resourceURL?.appendingPathComponent("Models", isDirectory: true) {
+            searchRoots.append(bundledModels)
+        }
+
+        defer {
+            scopedAccessURL?.stopAccessingSecurityScopedResource()
+        }
 
         for root in searchRoots {
             for name in names {

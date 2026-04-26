@@ -6,6 +6,8 @@ dist/*.dmg
 dist/*-rw.dmg
 dist/dmg-staging*/
 DerivedData/
+build/
+.archive-test/
 *.xcuserdata/
 *.xcuserstate
 

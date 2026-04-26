@@ -143,6 +143,20 @@ private struct SidebarView: View {
 
             Spacer()
 
+            VStack(alignment: .leading, spacing: 8) {
+                Button {
+                    store.chooseModelFolder()
+                } label: {
+                    Label("Choose Model Folder", systemImage: "folder")
+                        .frame(maxWidth: .infinity)
+                }
+
+                Text(store.modelFolderName)
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+                    .lineLimit(1)
+            }
+
             Link(destination: PokopiaData.sourceURL) {
                 Label("Open Game8 Blocks", systemImage: "safari")
                     .frame(maxWidth: .infinity)

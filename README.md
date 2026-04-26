@@ -135,11 +135,7 @@ Highest-priority model categories:
 - windows/doors
 - trees, flowers, and habitat props
 
-Drop local models into:
-
-```text
-~/Documents/Pokopia Models
-```
+Use **Choose Model Folder** in the app to select a local folder of custom models. The app stores sandbox-safe access to the folder so Mac App Store builds can load user-provided models.
 
 Supported extensions:
 

@@ -11,6 +11,8 @@ This document tracks what is ready, what still needs Apple account access, and w
 - Bundle identifier is neutral: `dev.pokopia.builder`.
 - Privacy manifest is bundled at `Sources/PokopiaBuilder/Resources/PrivacyInfo.xcprivacy`.
 - App Store sandbox entitlements are drafted at `config/PokopiaBuilder-AppStore.entitlements`.
+- `PokopiaBuilder.xcodeproj` is generated from `project.yml` for Xcode archive/upload workflows.
+- External model loading now uses a user-selected folder and a security-scoped bookmark.
 
 ## Apple Account Requirements
 
@@ -21,10 +23,68 @@ You need:
 - A registered macOS bundle ID, preferably `dev.pokopia.builder` or a bundle ID owned by your developer team.
 - Mac App Store distribution signing certificate and provisioning profile.
 - App Store Connect app record for macOS.
+- `xcodegen` installed locally (`brew install xcodegen`) if regenerating the checked-in Xcode project.
 
 ## Important Technical Notes
 
 The GitHub release DMG is for direct distribution only. The Mac App Store does not use that DMG. For App Store submission, create an App Store archive from Xcode and upload that archive/build to App Store Connect.
+
+This repo now includes a generated Xcode project:
+
+```text
+PokopiaBuilder.xcodeproj
+```
+
+Regenerate it after changing `project.yml`:
+
+```bash
+xcodegen generate
+```
+
+Create an App Store archive/export:
+
+```bash
+DEVELOPMENT_TEAM=YOUR_TEAM_ID scripts/archive-app-store.sh
+```
+
+The script writes:
+
+```text
+build/AppStoreArchives/PokopiaBuilder.xcarchive
+build/AppStoreExport/
+```
+
+If signing fails, open Xcode, sign in to your Apple Developer account, register the bundle ID, and make sure an Apple Distribution or Mac App Distribution certificate is available.
+
+## Current Signing Blocker
+
+The App Store archive script was tested with:
+
+```bash
+DEVELOPMENT_TEAM=SRGJ53HYRK scripts/archive-app-store.sh
+```
+
+Xcode reached the provisioning step, then failed because the Apple account login was rejected and no matching Mac signing certificate/private key was available:
+
+```text
+Unable to log in with account 'appleforever11@me.com'.
+No signing certificate "Mac Development" found.
+```
+
+Next action in Xcode:
+
+1. Open Xcode.
+2. Go to **Xcode > Settings > Accounts**.
+3. Sign back in to `appleforever11@me.com`.
+4. Select the Apple Developer team.
+5. Download/create Mac Development and Apple Distribution certificates.
+6. Re-run:
+
+```bash
+DEVELOPMENT_TEAM=SRGJ53HYRK scripts/archive-app-store.sh
+```
+
+If the team ID differs in Xcode, use that team ID instead.
 
 The app currently supports these network paths:
 
@@ -37,16 +97,7 @@ Because of that, the App Store entitlement file includes outgoing network access
 com.apple.security.network.client
 ```
 
-The app also has an external model override concept at:
-
-```text
-~/Documents/Pokopia Models
-```
-
-Under the Mac App Store sandbox, arbitrary access to that path will not be reliable without a user-selected folder flow and security-scoped bookmarks. The safest submission path is either:
-
-- disable automatic external model loading for the App Store build, or
-- add a user-facing "Choose Model Folder" button using `NSOpenPanel`, then store a security-scoped bookmark.
+The app supports external model overrides through a user-selected folder. This uses `NSOpenPanel` and a security-scoped bookmark instead of silently reading a fixed `~/Documents` path, which is safer for the Mac App Store sandbox.
 
 ## Privacy
 
@@ -158,8 +209,8 @@ Copyright 2026
 
 1. Decide whether the App Store build should include OpenAI mode.
 2. Decide whether to keep the `Pokopia Builder` name for App Store review or use a less IP-sensitive name.
-3. Add sandbox-safe folder picking for external 3D model folders, or disable external model lookup in App Store builds.
-4. Create a real Xcode app project/scheme for archiving, or use an XcodeGen/Tuist setup.
+3. Confirm sandbox-safe folder picking works in a signed App Store/TestFlight build.
+4. Open or regenerate the real Xcode project with `xcodegen generate`.
 5. Register the bundle ID in Certificates, Identifiers & Profiles.
 6. Enable App Sandbox and outgoing network entitlement.
 7. Create the app record in App Store Connect.
