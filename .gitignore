@@ -1,0 +1,14 @@
+.DS_Store
+.build/
+.swiftpm/
+dist/*.app/
+dist/*.dmg
+dist/*-rw.dmg
+dist/dmg-staging*/
+DerivedData/
+*.xcuserdata/
+*.xcuserstate
+
+# Local model and asset experiments
+Pokopia Models/
+tmp/
