@@ -24,7 +24,7 @@ if ! xcodebuild \
 Upload failed. If Xcode reports "Error Downloading App Information",
 verify App Store Connect has a macOS app record for bundle ID:
 
-  dev.pokopia.builder
+  com.appleforever11.pokopiabuilder
 
 See docs/APP_STORE_SUBMISSION.md for the current checklist.
 EOF

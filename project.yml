@@ -1,6 +1,6 @@
 name: PokopiaBuilder
 options:
-  bundleIdPrefix: dev.pokopia
+  bundleIdPrefix: com.appleforever11
   deploymentTarget:
     macOS: "14.0"
 settings:
@@ -20,7 +20,7 @@ targets:
           - Info.plist
     settings:
       base:
-        PRODUCT_BUNDLE_IDENTIFIER: dev.pokopia.builder
+        PRODUCT_BUNDLE_IDENTIFIER: com.appleforever11.pokopiabuilder
         PRODUCT_NAME: PokopiaBuilder
         INFOPLIST_FILE: Sources/PokopiaBuilder/Info.plist
         CODE_SIGN_ENTITLEMENTS: config/PokopiaBuilder-AppStore.entitlements

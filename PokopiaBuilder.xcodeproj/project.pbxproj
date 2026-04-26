@@ -309,7 +309,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = dev.pokopia.builder;
+				PRODUCT_BUNDLE_IDENTIFIER = com.appleforever11.pokopiabuilder;
 				PRODUCT_NAME = PokopiaBuilder;
 				SDKROOT = macosx;
 			};
@@ -329,7 +329,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = dev.pokopia.builder;
+				PRODUCT_BUNDLE_IDENTIFIER = com.appleforever11.pokopiabuilder;
 				PRODUCT_NAME = PokopiaBuilder;
 				SDKROOT = macosx;
 			};

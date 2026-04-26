@@ -8,7 +8,7 @@ This document tracks what is ready, what still needs Apple account access, and w
 - Apple Silicon compatible.
 - App icon is bundled as `PokopiaBuilder.icns`.
 - Category is set to `public.app-category.games`.
-- Bundle identifier is neutral: `dev.pokopia.builder`.
+- Bundle identifier is `com.appleforever11.pokopiabuilder`.
 - Privacy manifest is bundled at `Sources/PokopiaBuilder/Resources/PrivacyInfo.xcprivacy`.
 - App Store sandbox entitlements are drafted at `config/PokopiaBuilder-AppStore.entitlements`.
 - `PokopiaBuilder.xcodeproj` is generated from `project.yml` for Xcode archive/upload workflows.
@@ -20,7 +20,7 @@ You need:
 
 - Active Apple Developer Program membership.
 - App Store Connect access as Account Holder, Admin, App Manager, or Developer with upload permissions.
-- A registered macOS bundle ID, preferably `dev.pokopia.builder` or a bundle ID owned by your developer team.
+- A registered macOS bundle ID, preferably `com.appleforever11.pokopiabuilder` or another bundle ID owned by your developer team.
 - Mac App Store distribution signing certificate and provisioning profile.
 - App Store Connect app record for macOS.
 - `xcodegen` installed locally (`brew install xcodegen`) if regenerating the checked-in Xcode project.
@@ -83,12 +83,12 @@ build/AppStoreArchives/PokopiaBuilder.xcarchive
 build/AppStoreExport/Pokopia Builder.pkg
 ```
 
-The archive is signed for team `6TYPWRK7SN`, uses bundle ID `dev.pokopia.builder`, and includes the sandbox, user-selected read-only file access, and outgoing network entitlements.
+The archive is signed for team `6TYPWRK7SN`, uses bundle ID `com.appleforever11.pokopiabuilder`, and includes the sandbox, user-selected read-only file access, and outgoing network entitlements.
 
 The upload helper currently reaches App Store Connect, but App Store Connect is still returning no app record for this bundle ID:
 
 ```text
-IDEDistribution.DistributionAppRecordProviderError.missingApp(bundleId: "dev.pokopia.builder")
+IDEDistribution.DistributionAppRecordProviderError.missingApp(bundleId: "com.appleforever11.pokopiabuilder")
 AppStoreConnectAppsResponse(data: [])
 ```
 
@@ -98,7 +98,7 @@ Next action in App Store Connect:
 2. Go to **Xcode > Settings > Accounts**.
 3. Confirm the signed-in account can access team `6TYPWRK7SN`.
 4. Open App Store Connect > My Apps.
-5. Create or verify a macOS app record with bundle ID `dev.pokopia.builder`.
+5. Create or verify a macOS app record with bundle ID `com.appleforever11.pokopiabuilder`.
 6. Use SKU `pokopia-builder-macos` or another unique SKU.
 7. Wait a minute for App Store Connect to refresh, then re-run:
 
