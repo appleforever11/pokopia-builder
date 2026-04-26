@@ -1,5 +1,9 @@
 # Pokopia Builder
 
+<p align="center">
+  <img src="docs/assets/pokopia-builder-icon.png" alt="Pokopia Builder app icon" width="180">
+</p>
+
 Pokopia Builder is a native macOS arm64 SwiftUI app for planning **Pokemon Pokopia** builds. It combines a local item/block catalog, build material lists, prompt-based build generation, and a SceneKit 3D planning view.
 
 ![Pokopia Builder screenshot](docs/screenshots/pokopia-builder-main-cropped.png)
