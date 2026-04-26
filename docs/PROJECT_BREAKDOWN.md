@@ -33,6 +33,7 @@
   - creates compressed DMG with Applications shortcut
   - applies `dist/assets/pokopia-dmg-background.png` as the drag-and-drop installer background
   - writes Finder layout metadata for the app icon and Applications shortcut
+  - uses `create-dmg` when available so the background reference is portable after download
 
 ## Catalog Generation
 

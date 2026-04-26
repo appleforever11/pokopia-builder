@@ -68,23 +68,38 @@ echo "$APP_DIR"
 rm -rf "$DMG_STAGING"
 mkdir -p "$DMG_STAGING"
 ditto --noextattr --noqtn "$APP_DIR" "$DMG_STAGING/$DISPLAY_NAME.app"
-ln -s /Applications "$DMG_STAGING/Applications"
 clean_bundle_metadata "$DMG_STAGING/$DISPLAY_NAME.app"
 
 rm -f "$DMG_RW" "$DMG_PATH"
-hdiutil create -volname "$DISPLAY_NAME" -srcfolder "$DMG_STAGING" -ov -format UDRW "$DMG_RW" >/dev/null
+if command -v create-dmg >/dev/null; then
+  create-dmg \
+    --volname "$DISPLAY_NAME" \
+    --background "$DMG_BACKGROUND" \
+    --window-pos 100 100 \
+    --window-size 720 480 \
+    --icon-size 96 \
+    --icon "$DISPLAY_NAME.app" 220 245 \
+    --app-drop-link 500 245 \
+    --no-internet-enable \
+    --filesystem HFS+ \
+    --format UDZO \
+    "$DMG_PATH" \
+    "$DMG_STAGING" >/dev/null
+else
+  ln -s /Applications "$DMG_STAGING/Applications"
+  hdiutil create -volname "$DISPLAY_NAME" -srcfolder "$DMG_STAGING" -ov -format UDRW "$DMG_RW" >/dev/null
 
-rm -rf "$DMG_MOUNT"
-mkdir -p "$DMG_MOUNT"
-hdiutil attach "$DMG_RW" -readwrite -noverify -noautoopen -mountpoint "$DMG_MOUNT" >/dev/null
-mkdir -p "$DMG_MOUNT/.background"
-cp "$DMG_BACKGROUND" "$DMG_MOUNT/.background/pokopia-dmg-background.png"
+  rm -rf "$DMG_MOUNT"
+  mkdir -p "$DMG_MOUNT"
+  hdiutil attach "$DMG_RW" -readwrite -noverify -noautoopen -mountpoint "$DMG_MOUNT" >/dev/null
+  mkdir -p "$DMG_MOUNT/.background"
+  cp "$DMG_BACKGROUND" "$DMG_MOUNT/.background/pokopia-dmg-background.png"
 
-if command -v SetFile >/dev/null; then
-  SetFile -a V "$DMG_MOUNT/.background"
-fi
+  if command -v SetFile >/dev/null; then
+    SetFile -a V "$DMG_MOUNT/.background"
+  fi
 
-osascript <<APPLESCRIPT >/dev/null
+  osascript <<APPLESCRIPT >/dev/null
 tell application "Finder"
   set dmgFolder to POSIX file "$DMG_MOUNT" as alias
   open dmgFolder
@@ -104,13 +119,14 @@ tell application "Finder"
 end tell
 APPLESCRIPT
 
-clean_bundle_metadata "$DMG_MOUNT/$DISPLAY_NAME.app"
-if [[ "${CODE_SIGN:-1}" == "1" ]] && command -v codesign >/dev/null; then
-  codesign --verify --deep --strict --verbose=2 "$DMG_MOUNT/$DISPLAY_NAME.app"
-fi
+  clean_bundle_metadata "$DMG_MOUNT/$DISPLAY_NAME.app"
+  if [[ "${CODE_SIGN:-1}" == "1" ]] && command -v codesign >/dev/null; then
+    codesign --verify --deep --strict --verbose=2 "$DMG_MOUNT/$DISPLAY_NAME.app"
+  fi
 
-hdiutil detach "$DMG_MOUNT" -quiet
-hdiutil convert "$DMG_RW" -format UDZO -imagekey zlib-level=9 -o "$DMG_PATH" >/dev/null
+  hdiutil detach "$DMG_MOUNT" -quiet
+  hdiutil convert "$DMG_RW" -format UDZO -imagekey zlib-level=9 -o "$DMG_PATH" >/dev/null
+fi
 if [[ "${CODE_SIGN:-1}" == "1" ]] && command -v codesign >/dev/null; then
   codesign --force --timestamp --sign "$SIGNING_IDENTITY" "$DMG_PATH" >/dev/null
   codesign --verify --verbose=2 "$DMG_PATH"

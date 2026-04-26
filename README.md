@@ -189,6 +189,12 @@ Package as app + DMG:
 scripts/build-pokopia-builder-app.sh
 ```
 
+Install `create-dmg` first for the styled drag-and-drop installer window:
+
+```bash
+brew install create-dmg
+```
+
 ## Data Sources
 
 See:
