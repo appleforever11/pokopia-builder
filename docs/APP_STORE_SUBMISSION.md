@@ -54,37 +54,59 @@ build/AppStoreArchives/PokopiaBuilder.xcarchive
 build/AppStoreExport/
 ```
 
+Upload the latest archive to App Store Connect:
+
+```bash
+scripts/upload-app-store.sh
+```
+
 If signing fails, open Xcode, sign in to your Apple Developer account, register the bundle ID, and make sure an Apple Distribution or Mac App Distribution certificate is available.
 
-## Current Signing Blocker
+## Current Submission Status
 
-The App Store archive script was tested with:
+The App Store archive script was first tested with:
 
 ```bash
 DEVELOPMENT_TEAM=SRGJ53HYRK scripts/archive-app-store.sh
 ```
 
-Xcode reached the provisioning step, then failed because the Apple account login was rejected and no matching Mac signing certificate/private key was available:
+That team did not have the required signing setup locally. The successful App Store archive/export used:
 
-```text
-Unable to log in with account 'appleforever11@me.com'.
-No signing certificate "Mac Development" found.
+```bash
+DEVELOPMENT_TEAM=6TYPWRK7SN scripts/archive-app-store.sh
 ```
 
-Next action in Xcode:
+Current local outputs:
+
+```text
+build/AppStoreArchives/PokopiaBuilder.xcarchive
+build/AppStoreExport/Pokopia Builder.pkg
+```
+
+The archive is signed for team `6TYPWRK7SN`, uses bundle ID `dev.pokopia.builder`, and includes the sandbox, user-selected read-only file access, and outgoing network entitlements.
+
+The upload helper currently reaches App Store Connect, but App Store Connect is still returning no app record for this bundle ID:
+
+```text
+IDEDistribution.DistributionAppRecordProviderError.missingApp(bundleId: "dev.pokopia.builder")
+AppStoreConnectAppsResponse(data: [])
+```
+
+Next action in App Store Connect:
 
 1. Open Xcode.
 2. Go to **Xcode > Settings > Accounts**.
-3. Sign back in to `appleforever11@me.com`.
-4. Select the Apple Developer team.
-5. Download/create Mac Development and Apple Distribution certificates.
-6. Re-run:
+3. Confirm the signed-in account can access team `6TYPWRK7SN`.
+4. Open App Store Connect > My Apps.
+5. Create or verify a macOS app record with bundle ID `dev.pokopia.builder`.
+6. Use SKU `pokopia-builder-macos` or another unique SKU.
+7. Wait a minute for App Store Connect to refresh, then re-run:
 
 ```bash
-DEVELOPMENT_TEAM=SRGJ53HYRK scripts/archive-app-store.sh
+scripts/upload-app-store.sh
 ```
 
-If the team ID differs in Xcode, use that team ID instead.
+If the app record was created with a different bundle ID, update `PRODUCT_BUNDLE_IDENTIFIER` in `project.yml`, regenerate the Xcode project, re-archive, and upload again.
 
 The app currently supports these network paths:
 
