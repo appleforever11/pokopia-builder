@@ -31,6 +31,8 @@
   - copies SwiftPM resource bundle
   - optionally copies local Pokopedia assets if installed
   - creates compressed DMG with Applications shortcut
+  - applies `dist/assets/pokopia-dmg-background.png` as the drag-and-drop installer background
+  - writes Finder layout metadata for the app icon and Applications shortcut
 
 ## Catalog Generation
 

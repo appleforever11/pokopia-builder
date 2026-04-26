@@ -6,8 +6,10 @@ APP_NAME="PokopiaBuilder"
 DISPLAY_NAME="Pokopia Builder"
 APP_DIR="$ROOT_DIR/dist/$DISPLAY_NAME.app"
 DMG_STAGING="$ROOT_DIR/dist/dmg-staging-pokopia-builder"
+DMG_MOUNT="$ROOT_DIR/dist/dmg-mount-pokopia-builder"
 DMG_RW="$ROOT_DIR/dist/Pokopia-Builder-0.1.0-arm64-rw.dmg"
 DMG_PATH="$ROOT_DIR/dist/Pokopia-Builder-0.1.0-arm64.dmg"
+DMG_BACKGROUND="$ROOT_DIR/dist/assets/pokopia-dmg-background.png"
 CONTENTS_DIR="$APP_DIR/Contents"
 MACOS_DIR="$CONTENTS_DIR/MacOS"
 RESOURCES_DIR="$CONTENTS_DIR/Resources"
@@ -47,8 +49,41 @@ xattr -cr "$DMG_STAGING/$DISPLAY_NAME.app" 2>/dev/null || true
 
 rm -f "$DMG_RW" "$DMG_PATH"
 hdiutil create -volname "$DISPLAY_NAME" -srcfolder "$DMG_STAGING" -ov -format UDRW "$DMG_RW" >/dev/null
+
+rm -rf "$DMG_MOUNT"
+mkdir -p "$DMG_MOUNT"
+hdiutil attach "$DMG_RW" -readwrite -noverify -noautoopen -mountpoint "$DMG_MOUNT" >/dev/null
+mkdir -p "$DMG_MOUNT/.background"
+cp "$DMG_BACKGROUND" "$DMG_MOUNT/.background/pokopia-dmg-background.png"
+
+if command -v SetFile >/dev/null; then
+  SetFile -a V "$DMG_MOUNT/.background"
+fi
+
+osascript <<APPLESCRIPT >/dev/null
+tell application "Finder"
+  set dmgFolder to POSIX file "$DMG_MOUNT" as alias
+  open dmgFolder
+  set current view of container window of dmgFolder to icon view
+  set toolbar visible of container window of dmgFolder to false
+  set statusbar visible of container window of dmgFolder to false
+  set the bounds of container window of dmgFolder to {100, 100, 820, 580}
+  set viewOptions to the icon view options of container window of dmgFolder
+  set arrangement of viewOptions to not arranged
+  set icon size of viewOptions to 96
+  set background picture of viewOptions to file ".background:pokopia-dmg-background.png" of dmgFolder
+  set position of item "$DISPLAY_NAME.app" of dmgFolder to {220, 245}
+  set position of item "Applications" of dmgFolder to {500, 245}
+  update dmgFolder without registering applications
+  delay 1
+  close container window of dmgFolder
+end tell
+APPLESCRIPT
+
+hdiutil detach "$DMG_MOUNT" -quiet
 hdiutil convert "$DMG_RW" -format UDZO -imagekey zlib-level=9 -o "$DMG_PATH" >/dev/null
 rm -f "$DMG_RW"
 rm -rf "$DMG_STAGING"
+rm -rf "$DMG_MOUNT"
 
 echo "$DMG_PATH"

@@ -23,6 +23,7 @@ Pokopia Builder is a native macOS arm64 SwiftUI app for planning **Pokemon Pokop
 - Procedural 3D fallbacks for blocks, floors, walls, crystals, lights, roads, carpets, ores, rocks, and construction pieces.
 - Real 3D model override pipeline for `.usdz`, `.scn`, `.dae`, and `.obj` files.
 - macOS app icon and DMG packaging script.
+- Styled drag-and-drop DMG installer window with a Pokopia-inspired background.
 
 ## Download
 
@@ -87,6 +88,7 @@ The app was built in layers:
    - original app icon was generated as a Pokopia-inspired voxel/build-grid mark
    - converted to `.icns`
    - `scripts/build-pokopia-builder-app.sh` builds the app and DMG
+   - the DMG uses `dist/assets/pokopia-dmg-background.png` for the drag-and-drop installer window
 
 ## 3D Model Limitations
 
