@@ -199,6 +199,7 @@ See:
 
 - [Pokopia data sources](DataSources/POKOPIA-SOURCES.md)
 - [3D model pipeline](DataSources/POKOPIA-3D-MODELS.md)
+- [Mac App Store submission notes](docs/APP_STORE_SUBMISSION.md)
 
 ## Legal / Attribution Note
 
