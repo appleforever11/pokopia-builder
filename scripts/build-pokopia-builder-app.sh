@@ -39,6 +39,7 @@ cleanup_build_root() {
 trap cleanup_build_root EXIT
 
 cd "$ROOT_DIR"
+"$ROOT_DIR/scripts/generate-dmg-background.py" >/dev/null
 swift build -c release --arch arm64 --product "$APP_NAME"
 
 rm -rf "$APP_DIR"

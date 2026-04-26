@@ -195,6 +195,12 @@ Install `create-dmg` first for the styled drag-and-drop installer window:
 brew install create-dmg
 ```
 
+The DMG background is generated from `dist/assets/pokopia-dmg-background-base.png` by:
+
+```bash
+scripts/generate-dmg-background.py
+```
+
 ## Data Sources
 
 See:

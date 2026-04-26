@@ -25,6 +25,7 @@
 
 - `scripts/build-pokopia-builder-app.sh`
   - builds arm64 release binary
+  - regenerates the Pokopia-inspired DMG background artwork
   - creates `.app` bundle
   - copies `Info.plist`
   - copies app icon
@@ -34,6 +35,11 @@
   - applies `dist/assets/pokopia-dmg-background.png` as the drag-and-drop installer background
   - writes Finder layout metadata for the app icon and Applications shortcut
   - uses `create-dmg` when available so the background reference is portable after download
+
+- `scripts/generate-dmg-background.py`
+  - draws the Pokopia-inspired `Pokopia Builder` title treatment
+  - adds the drag-to-Applications instruction cue
+  - writes both `dist/assets/pokopia-dmg-background.png` and `docs/assets/pokopia-dmg-background.png`
 
 ## Catalog Generation
 
