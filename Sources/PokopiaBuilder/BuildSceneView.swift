@@ -747,6 +747,10 @@ private extension PokopiaBlock {
             searchRoots.append(selectedFolder)
         }
 
+        if AppVariant.isPersonalBuild, let defaultFolder = AppVariant.defaultModelFolder {
+            searchRoots.append(defaultFolder)
+        }
+
         if let bundledModels = AppResources.bundle.resourceURL?.appendingPathComponent("Models", isDirectory: true) {
             searchRoots.append(bundledModels)
         }

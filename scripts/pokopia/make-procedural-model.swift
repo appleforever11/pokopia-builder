@@ -9,6 +9,9 @@ enum Shape: String {
     case crystal
     case cylinder
     case lamp
+    case sign
+    case fence
+    case stairs
 }
 
 func color(_ hex: String) -> NSColor {
@@ -80,6 +83,36 @@ func makeScene(shape: Shape, baseColor: NSColor) -> SCNScene {
         let lightNode = SCNNode(geometry: lightBox)
         lightNode.position.y = 1.16
         root.addChildNode(lightNode)
+    case .sign:
+        let post = SCNCylinder(radius: 0.045, height: 0.72)
+        post.firstMaterial = material(baseColor.blended(withFraction: 0.35, of: .black) ?? baseColor)
+        let postNode = SCNNode(geometry: post)
+        postNode.position.y = 0.36
+        root.addChildNode(postNode)
+
+        let face = SCNBox(width: 0.72, height: 0.44, length: 0.08, chamferRadius: 0.025)
+        let top = material(baseColor.blended(withFraction: 0.22, of: .white) ?? baseColor)
+        face.materials = [top, top, top, top, top, top]
+        let faceNode = SCNNode(geometry: face)
+        faceNode.position.y = 0.88
+        root.addChildNode(faceNode)
+    case .fence:
+        for x in [-0.36, 0.36] {
+            let post = box(width: 0.12, height: 0.72, length: 0.12, chamfer: 0.025, color: baseColor)
+            post.position.x = CGFloat(x)
+            root.addChildNode(post)
+        }
+        for y in [0.28, 0.52] {
+            let rail = box(width: 0.9, height: 0.12, length: 0.10, chamfer: 0.018, color: baseColor)
+            rail.position.y = CGFloat(y)
+            root.addChildNode(rail)
+        }
+    case .stairs:
+        for index in 0..<3 {
+            let step = box(width: 1, height: 0.16, length: 0.34, chamfer: 0.02, color: baseColor)
+            step.position = SCNVector3(0, CGFloat(index + 1) * 0.08, CGFloat(index) * 0.23 - 0.23)
+            root.addChildNode(step)
+        }
     }
 
     return scene
@@ -87,7 +120,7 @@ func makeScene(shape: Shape, baseColor: NSColor) -> SCNScene {
 
 let args = CommandLine.arguments
 guard args.count >= 4 else {
-    fputs("Usage: make-procedural-model.swift <name-slug> <shape:cube|floor|wall|crystal|cylinder|lamp> <hex-color> [output-dir]\n", stderr)
+    fputs("Usage: make-procedural-model.swift <name-slug> <shape:cube|floor|wall|crystal|cylinder|lamp|sign|fence|stairs> <hex-color> [output-dir]\n", stderr)
     exit(2)
 }
 

@@ -8,8 +8,9 @@ struct PokopiaBuilderApp: App {
         WindowGroup {
             ContentView()
                 .environmentObject(store)
-                .frame(minWidth: 1120, minHeight: 720)
+                .frame(minWidth: 980, minHeight: 620)
         }
+        .defaultSize(width: 1120, height: 700)
         .windowStyle(.titleBar)
     }
 }

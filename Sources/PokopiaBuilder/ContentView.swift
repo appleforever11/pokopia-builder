@@ -8,8 +8,10 @@ struct ContentView: View {
     var body: some View {
         NavigationSplitView {
             SidebarView()
+                .navigationSplitViewColumnWidth(min: 240, ideal: 280, max: 320)
         } content: {
             BlockLibraryView()
+                .navigationSplitViewColumnWidth(min: 260, ideal: 320, max: 380)
         } detail: {
             BuildWorkspaceView()
         }
@@ -46,125 +48,140 @@ private struct SidebarView: View {
     @EnvironmentObject private var store: PlannerStore
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 16) {
-            VStack(alignment: .leading, spacing: 6) {
-                Text("Pokopia Builder")
-                    .font(.title2.weight(.bold))
-                Text("\(store.blocks.count) local items and blocks")
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
-            }
-            .padding(.top, 18)
-
-            TextField("Search blocks", text: $store.searchText)
-                .textFieldStyle(.roundedBorder)
-
-            VStack(spacing: 6) {
-                ForEach(BlockKind.allCases) { kind in
-                    Button {
-                        store.selectedKind = kind
-                    } label: {
-                        Label(kind.rawValue, systemImage: kind.symbol)
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                    }
-                    .buttonStyle(FilterButtonStyle(isSelected: store.selectedKind == kind))
-                }
-            }
-
-            Divider()
-
-            VStack(alignment: .leading, spacing: 10) {
-                Label("Prompt Generator", systemImage: "wand.and.stars")
-                    .font(.headline)
-
-                Picker("Generator", selection: $store.generatorProvider) {
-                    ForEach(BuildGeneratorProvider.allCases) { provider in
-                        Text(provider.rawValue).tag(provider)
-                    }
-                }
-                .pickerStyle(.segmented)
-
-                TextEditor(text: $store.promptText)
-                    .font(.callout)
-                    .frame(minHeight: 92)
-                    .scrollContentBackground(.hidden)
-                    .background(.background)
-                    .clipShape(RoundedRectangle(cornerRadius: 8))
-                    .overlay {
-                        RoundedRectangle(cornerRadius: 8)
-                            .stroke(Color(nsColor: .separatorColor), lineWidth: 1)
-                    }
-
-                HStack {
-                    if store.generatorProvider == .local {
-                        TextField("Ollama model", text: $store.model)
-                            .textFieldStyle(.roundedBorder)
-                    } else {
-                        TextField("OpenAI model", text: $store.openAIModel)
-                            .textFieldStyle(.roundedBorder)
-                    }
-
-                    Button {
-                        Task { await store.generateFromPrompt() }
-                    } label: {
-                        if store.isGeneratingAI {
-                            ProgressView()
-                                .controlSize(.small)
-                        } else {
-                            Image(systemName: "sparkles")
-                        }
-                    }
-                    .disabled(store.isGeneratingAI)
-                    .help("Generate from prompt")
-                }
-
-                if store.generatorProvider == .openAI {
-                    SecureField("OpenAI API key", text: $store.openAIAPIKey)
-                        .textFieldStyle(.roundedBorder)
-                        .onSubmit {
-                            store.saveAPIKey()
-                        }
-                }
-
-                Button {
-                    store.randomize()
-                } label: {
-                    Label("Offline Random", systemImage: "dice")
-                        .frame(maxWidth: .infinity)
-                }
-
-                if let status = store.statusMessage {
-                    Text(status)
+        ScrollView {
+            VStack(alignment: .leading, spacing: 16) {
+                VStack(alignment: .leading, spacing: 6) {
+                    Text(AppVariant.displaySuffix.isEmpty ? "Pokopia Builder" : "Pokopia Builder \(AppVariant.displaySuffix)")
+                        .font(.title2.weight(.bold))
+                    Text("\(store.blocks.count) local items and blocks")
                         .font(.caption)
                         .foregroundStyle(.secondary)
-                        .lineLimit(3)
                 }
-            }
+                .padding(.top, 18)
 
-            Spacer()
+                TextField("Search blocks", text: $store.searchText)
+                    .textFieldStyle(.roundedBorder)
 
-            VStack(alignment: .leading, spacing: 8) {
-                Button {
-                    store.chooseModelFolder()
-                } label: {
-                    Label("Choose Model Folder", systemImage: "folder")
+                VStack(spacing: 6) {
+                    ForEach(BlockKind.allCases) { kind in
+                        Button {
+                            store.selectedKind = kind
+                        } label: {
+                            Label(kind.rawValue, systemImage: kind.symbol)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                        }
+                        .buttonStyle(FilterButtonStyle(isSelected: store.selectedKind == kind))
+                    }
+                }
+
+                Divider()
+
+                VStack(alignment: .leading, spacing: 10) {
+                    Label("Prompt Generator", systemImage: "wand.and.stars")
+                        .font(.headline)
+
+                    if AppVariant.isPersonalBuild {
+                        Picker("Generator", selection: $store.generatorProvider) {
+                            ForEach(BuildGeneratorProvider.allCases) { provider in
+                                Text(provider.rawValue).tag(provider)
+                            }
+                        }
+                        .pickerStyle(.segmented)
+                    } else {
+                        Text("Free Local")
+                            .font(.caption.weight(.semibold))
+                            .foregroundStyle(.secondary)
+                    }
+
+                    TextEditor(text: $store.promptText)
+                        .font(.callout)
+                        .frame(minHeight: 92)
+                        .scrollContentBackground(.hidden)
+                        .background(.background)
+                        .clipShape(RoundedRectangle(cornerRadius: 8))
+                        .overlay {
+                            RoundedRectangle(cornerRadius: 8)
+                                .stroke(Color(nsColor: .separatorColor), lineWidth: 1)
+                        }
+
+                    HStack {
+                        if store.generatorProvider == .local || !AppVariant.isPersonalBuild {
+                            TextField("Ollama model", text: $store.model)
+                                .textFieldStyle(.roundedBorder)
+                        } else {
+                            TextField("OpenAI model", text: $store.openAIModel)
+                                .textFieldStyle(.roundedBorder)
+                        }
+
+                        Button {
+                            Task { await store.generateFromPrompt() }
+                        } label: {
+                            if store.isGeneratingAI {
+                                ProgressView()
+                                    .controlSize(.small)
+                            } else {
+                                Image(systemName: "sparkles")
+                            }
+                        }
+                        .disabled(store.isGeneratingAI)
+                        .help("Generate from prompt")
+                    }
+
+                    if AppVariant.isPersonalBuild && store.generatorProvider == .openAI {
+                        SecureField("OpenAI API key", text: $store.openAIAPIKey)
+                            .textFieldStyle(.roundedBorder)
+                            .onSubmit {
+                                store.saveAPIKey()
+                            }
+                    }
+
+                    Button {
+                        store.randomize()
+                    } label: {
+                        Label("Offline Random", systemImage: "dice")
+                            .frame(maxWidth: .infinity)
+                    }
+
+                    if let status = store.statusMessage {
+                        Text(status)
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                            .lineLimit(3)
+                            .fixedSize(horizontal: false, vertical: true)
+                    }
+                }
+
+                if AppVariant.isPersonalBuild {
+                    Divider()
+
+                    VStack(alignment: .leading, spacing: 8) {
+                        Text("Custom 3D Models")
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+
+                        Button {
+                            store.chooseModelFolder()
+                        } label: {
+                            Label("Choose Model Folder", systemImage: "folder")
+                                .frame(maxWidth: .infinity)
+                        }
+
+                        Text(store.modelFolderName)
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                            .lineLimit(1)
+                    }
+                }
+
+                Link(destination: PokopiaData.sourceURL) {
+                    Label("Open Game8 Blocks", systemImage: "safari")
                         .frame(maxWidth: .infinity)
                 }
-
-                Text(store.modelFolderName)
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
-                    .lineLimit(1)
             }
-
-            Link(destination: PokopiaData.sourceURL) {
-                Label("Open Game8 Blocks", systemImage: "safari")
-                    .frame(maxWidth: .infinity)
-            }
+            .padding(.horizontal, 16)
+            .padding(.bottom, 16)
         }
-        .padding(.horizontal, 16)
-        .padding(.bottom, 16)
-        .frame(minWidth: 230)
+        .frame(minWidth: 240)
     }
 }
 
@@ -241,10 +258,15 @@ private struct BuildWorkspaceView: View {
             VStack(alignment: .leading, spacing: 6) {
                 Text(store.generatedIdea?.name ?? "Custom Build")
                     .font(.system(size: 30, weight: .bold))
+                    .lineLimit(2)
+                    .minimumScaleFactor(0.82)
                 Text("Drag items into the 3D scene, tune quantities, or generate a prompt-based build plan.")
                     .font(.callout)
                     .foregroundStyle(.secondary)
+                    .lineLimit(2)
+                    .fixedSize(horizontal: false, vertical: true)
             }
+            .layoutPriority(1)
 
             Spacer()
 

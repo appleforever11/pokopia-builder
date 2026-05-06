@@ -235,14 +235,15 @@ final class PlannerStore: ObservableObject {
 
     func generateFromPrompt() async {
         isGeneratingAI = true
-        statusMessage = generatorProvider == .local ? "Generating locally..." : "Asking OpenAI for a build plan..."
+        let activeProvider: BuildGeneratorProvider = AppVariant.isPersonalBuild ? generatorProvider : .local
+        statusMessage = activeProvider == .local ? "Generating locally..." : "Asking OpenAI for a build plan..."
         defer { isGeneratingAI = false }
 
         do {
             let catalog = relevantCatalog(for: promptText)
             let idea: AIBuildIdea
 
-            switch generatorProvider {
+            switch activeProvider {
             case .local:
                 let client = LocalBuildIdeaClient(model: model)
                 idea = await client.generateIdea(prompt: promptText, catalog: catalog)
